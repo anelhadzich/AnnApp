@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0442B34820DE268500435473 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0442B34620DE268500435473 /* CustomTableViewCell.swift */; };
+		0442B34920DE268500435473 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0442B34720DE268500435473 /* CustomTableViewCell.xib */; };
 		0451A53F20DBBE4C005B3FC1 /* MoviesDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451A53E20DBBE4C005B3FC1 /* MoviesDataModel.swift */; };
+		046D2F3920E0F9B9000D38D0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046D2F3820E0F9B9000D38D0 /* DetailViewController.swift */; };
 		049C1AC220D9180100F02048 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C1AC120D9180100F02048 /* AppDelegate.swift */; };
 		049C1AC420D9180100F02048 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049C1AC320D9180100F02048 /* ViewController.swift */; };
 		049C1AC720D9180100F02048 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 049C1AC520D9180100F02048 /* Main.storyboard */; };
@@ -17,7 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0442B34620DE268500435473 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		0442B34720DE268500435473 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		0451A53E20DBBE4C005B3FC1 /* MoviesDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDataModel.swift; sourceTree = "<group>"; };
+		046D2F3820E0F9B9000D38D0 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		049C1ABE20D9180100F02048 /* AnnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AnnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		049C1AC120D9180100F02048 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		049C1AC320D9180100F02048 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +48,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0442B34520DE25BE00435473 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				0442B34620DE268500435473 /* CustomTableViewCell.swift */,
+				0442B34720DE268500435473 /* CustomTableViewCell.xib */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
 		0451A54020DBBE54005B3FC1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +89,8 @@
 			children = (
 				049C1AC120D9180100F02048 /* AppDelegate.swift */,
 				049C1AC320D9180100F02048 /* ViewController.swift */,
+				046D2F3820E0F9B9000D38D0 /* DetailViewController.swift */,
+				0442B34520DE25BE00435473 /* CustomCell */,
 				049C1AC520D9180100F02048 /* Main.storyboard */,
 				049C1AC820D9180100F02048 /* Assets.xcassets */,
 				049C1ACA20D9180100F02048 /* LaunchScreen.storyboard */,
@@ -162,6 +179,7 @@
 			files = (
 				049C1ACC20D9180100F02048 /* LaunchScreen.storyboard in Resources */,
 				049C1AC920D9180100F02048 /* Assets.xcassets in Resources */,
+				0442B34920DE268500435473 /* CustomTableViewCell.xib in Resources */,
 				049C1AC720D9180100F02048 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,12 +213,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-AnnApp/Pods-AnnApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -218,6 +238,8 @@
 			files = (
 				0451A53F20DBBE4C005B3FC1 /* MoviesDataModel.swift in Sources */,
 				049C1AC420D9180100F02048 /* ViewController.swift in Sources */,
+				046D2F3920E0F9B9000D38D0 /* DetailViewController.swift in Sources */,
+				0442B34820DE268500435473 /* CustomTableViewCell.swift in Sources */,
 				049C1AC220D9180100F02048 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

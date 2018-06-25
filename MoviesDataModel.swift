@@ -11,7 +11,9 @@ import UIKit
 
 class MoviesDataModel {
     
-    var movieName : String = ""
-    var movieDescription : String = ""
+    var titleLabel : String = ""
+    var descriptionLabel : String = ""
+    
+    var object : [String : String]?
     
 }
