@@ -14,6 +14,4 @@ class MoviesDataModel {
     var titleLabel : String = ""
     var descriptionLabel : String = ""
     
-    var object : [String : String]?
-    
 }
