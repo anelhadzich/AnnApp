@@ -26,7 +26,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var TVShowsDictionaryArray: [[String:AnyObject]] = []
     
     var passedTitle: [String:AnyObject]?
-    var passedOverview: String!
+    var passedOverview: [String:AnyObject]?
     
     @IBOutlet weak var movieNameLabel: UILabel!
     
@@ -112,7 +112,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-        passedTitle = movieDictionaryArray[indexPath.row]
+        if segmentedControl.selectedSegmentIndex == 0 {
+            passedTitle = movieDictionaryArray[indexPath.row]
+            passedOverview = movieDictionaryArray[indexPath.row]
+        } else {
+            passedTitle = TVShowsDictionaryArray[indexPath.row]
+            passedOverview = TVShowsDictionaryArray[indexPath.row]
+        }
         performSegue(withIdentifier: "detail", sender: self)
     }
     
@@ -124,7 +130,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "detail" {
-            let detailViewController = segue.destination as! DetailViewController
+            _ = segue.destination as! DetailViewController
 
             let viewController = segue.destination as! DetailViewController
             viewController.passedValue = passedTitle

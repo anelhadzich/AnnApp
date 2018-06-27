@@ -24,16 +24,20 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
 
         detailImage.kf.setImage(with: url)
+
+        if let data = passedValue!["original_name"] {
+            titleLabel.text = (passedValue?["original_name"] as! String)
+        } else {
+            titleLabel.text = (passedValue!["title"] as! String)
+        }
+        	
         
-        if let movie = passedValue {
-            print(movie)
-            titleLabel.text = movie["title"] as? String
-            textView.text = movie["overview"] as? String
-            
+        textView.text = passedValue!["overview"] as? String
+
         }
         
         // Do any additional setup after loading the view.
-    }
+    
     
     
 
@@ -41,4 +45,5 @@ class DetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
 }
