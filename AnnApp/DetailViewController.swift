@@ -11,8 +11,8 @@ import Kingfisher
 
 class DetailViewController: UIViewController {
    
-    let details = MoviesDataModel()
-   
+    var passedValue: [String:AnyObject]?
+    
     @IBOutlet weak var detailImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
@@ -24,8 +24,13 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
 
         detailImage.kf.setImage(with: url)
-        titleLabel.text = "Naslov"
-        textView.text = "Opis filma"
+        
+        if let movie = passedValue {
+            print(movie)
+            titleLabel.text = movie["title"] as? String
+            textView.text = movie["overview"] as? String
+            
+        }
         
         // Do any additional setup after loading the view.
     }

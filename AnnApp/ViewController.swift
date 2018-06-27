@@ -25,6 +25,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var movieDictionaryArray:[[String:AnyObject]] = []
     var TVShowsDictionaryArray: [[String:AnyObject]] = []
     
+    var passedTitle: [String:AnyObject]?
+    var passedOverview: String!
+    
     @IBOutlet weak var movieNameLabel: UILabel!
     
     override func viewDidLoad() {
@@ -90,7 +93,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
-        
+
         cell.accessoryType = .disclosureIndicator
 
         if segmentedControl.selectedSegmentIndex == 0 {
@@ -98,19 +101,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.descriptionLabel.text = movieDictionaryArray[indexPath.row]["overview"] as? String
         cell.numberLabel.text = " \(indexPath.row + 1)"
         } else {
-
-
             cell.titleLabel.text = TVShowsDictionaryArray[indexPath.row]["original_name"] as? String
             cell.descriptionLabel.text = TVShowsDictionaryArray[indexPath.row]["overview"] as? String
             cell.numberLabel.text = " \(indexPath.row + 1)"
         }
+        
         return cell
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
 
-        performSegue(withIdentifier: "detail", sender: UITableViewCell.self)
+        passedTitle = movieDictionaryArray[indexPath.row]
+        performSegue(withIdentifier: "detail", sender: self)
     }
     
     @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
@@ -119,17 +122,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
-    //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "detail" {
-//            let detailViewController = segue.destination as! DetailViewController
-//
-//            if let selectedMovieCell = sender as? CustomTableViewCell {
-//                let indexPath = tableView.indexPath(for: selectedMovieCell)!
-//                let selectedMovie = movieDictionaryArray[indexPath.row]
-//            }
-//
-//        }
-    }
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detail" {
+            let detailViewController = segue.destination as! DetailViewController
 
+            let viewController = segue.destination as! DetailViewController
+            viewController.passedValue = passedTitle
+
+        }
+    }
+}
 
 
