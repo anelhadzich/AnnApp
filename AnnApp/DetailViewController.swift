@@ -13,19 +13,25 @@ class DetailViewController: UIViewController {
    
     var passedValue: [String:AnyObject]?
     
+    let baseURL = "http://image.tmdb.org/t/p/w500/"
+    
     @IBOutlet weak var detailImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var textView: UITextView!
     
-    let url = URL(string: "https://9to5mac.files.wordpress.com/2018/06/ios-12-beta-2-changes-features-9to5mac.jpg?quality=82&w=2000#038;strip=all&w=1600")
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        detailImage.kf.setImage(with: url)
-
-        if let data = passedValue!["original_name"] {
+        
+        if let pictureURL = passedValue!["backdrop_path"] as? String {
+            print(pictureURL)
+           
+            var fullPath = baseURL + pictureURL
+            let resource = ImageResource(downloadURL: URL(string: fullPath)!, cacheKey: fullPath)
+            
+            detailImage.kf.setImage(with: resource)
+        
+      if let data = passedValue!["original_name"] {
             titleLabel.text = (passedValue?["original_name"] as! String)
         } else {
             titleLabel.text = (passedValue!["title"] as! String)
@@ -35,6 +41,7 @@ class DetailViewController: UIViewController {
         textView.text = passedValue!["overview"] as? String
 
         }
+    }
         
         // Do any additional setup after loading the view.
     

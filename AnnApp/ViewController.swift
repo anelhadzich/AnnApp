@@ -10,11 +10,13 @@ import UIKit
 import Foundation
 import Alamofire
 import SwiftyJSON
+import Kingfisher
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let url = "https://api.themoviedb.org/3/movie/top_rated?api_key=3d4d979cdacbd1d26140caec278b07c3&language=en-US&page=1"
     let urlTVShows = "https://api.themoviedb.org/3/tv/top_rated?api_key=3d4d979cdacbd1d26140caec278b07c3&language=en-US&page=1"
+    
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -28,6 +30,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var passedTitle: [String:AnyObject]?
     var passedOverview: [String:AnyObject]?
     
+    let baseURL = "http://image.tmdb.org/t/p/w500/"
+
     @IBOutlet weak var movieNameLabel: UILabel!
     
     override func viewDidLoad() {
@@ -36,13 +40,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "customCell")
-        
+
         getMovieData(url: url)
         getTVShowsData(url: urlTVShows)
         
-        print(segmentedControl.selectedSegmentIndex)
+        var baseURL = "http://image.tmdb.org/t/p/w500/"
         
-        }
+        
+       
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -59,7 +65,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if let temp = movieJSON["results"].arrayObject {
                     self.movieDictionaryArray = temp as! [[String:AnyObject]]
                     self.tableView.reloadData()
-                  //  print(self.movieDictionaryArray)
                 }
             }
             else {
@@ -78,7 +83,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if let tempTVShows = TVShowsJSON["results"].arrayObject {
                     self.TVShowsDictionaryArray = tempTVShows as! [[String:AnyObject]]
                     self.tableView.reloadData()
-                    
+
                    // print(self.TVShowsDictionaryArray)
                 }
             }
@@ -95,19 +100,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
 
         cell.accessoryType = .disclosureIndicator
-
+       
+        if let moviePicture = movieDictionaryArray[indexPath.row]["poster_path"] as? String {
+                   
+            var fullPath = baseURL + moviePicture
+            let resource = ImageResource(downloadURL: URL(string: fullPath)!, cacheKey: fullPath)
+ 
         if segmentedControl.selectedSegmentIndex == 0 {
         cell.titleLabel.text = movieDictionaryArray[indexPath.row]["title"] as? String
         cell.descriptionLabel.text = movieDictionaryArray[indexPath.row]["overview"] as? String
         cell.numberLabel.text = " \(indexPath.row + 1)"
-        } else {
+            
+           cell.moviePic.kf.setImage(with: resource)
+            return cell
+            }
+
+            
+            if let TVShowPicture = TVShowsDictionaryArray[indexPath.row]["poster_path"] as? String {
+            
+                var fullPathTVShows = baseURL + TVShowPicture
+                let resource = ImageResource(downloadURL: URL(string: fullPathTVShows)!, cacheKey: fullPathTVShows)
+                
             cell.titleLabel.text = TVShowsDictionaryArray[indexPath.row]["original_name"] as? String
             cell.descriptionLabel.text = TVShowsDictionaryArray[indexPath.row]["overview"] as? String
             cell.numberLabel.text = " \(indexPath.row + 1)"
+                
+                cell.moviePic.kf.setImage(with: resource)
+            
+            //   cell.moviePic.kf.setImage(with: resource)
+       
+                return cell
+        }
+        
         }
         
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -136,6 +163,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             viewController.passedValue = passedTitle
 
         }
+    }
+    
+    func loadImages() {
+        
+        
     }
 }
 
