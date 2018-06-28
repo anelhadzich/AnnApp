@@ -83,27 +83,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 if let tempTVShows = TVShowsJSON["results"].arrayObject {
                     self.TVShowsDictionaryArray = tempTVShows as! [[String:AnyObject]]
                     self.tableView.reloadData()
-
-                   // print(self.TVShowsDictionaryArray)
                 }
             }
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       // print (movieDictionaryArray.count)
-        
         return (TVShowsDictionaryArray.count) - 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as! CustomTableViewCell
-
         cell.accessoryType = .disclosureIndicator
        
         if let moviePicture = movieDictionaryArray[indexPath.row]["poster_path"] as? String {
                    
-            var fullPath = baseURL + moviePicture
+            let fullPath = baseURL + moviePicture
             let resource = ImageResource(downloadURL: URL(string: fullPath)!, cacheKey: fullPath)
  
         if segmentedControl.selectedSegmentIndex == 0 {
@@ -118,7 +113,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             if let TVShowPicture = TVShowsDictionaryArray[indexPath.row]["poster_path"] as? String {
             
-                var fullPathTVShows = baseURL + TVShowPicture
+                let fullPathTVShows = baseURL + TVShowPicture
                 let resource = ImageResource(downloadURL: URL(string: fullPathTVShows)!, cacheKey: fullPathTVShows)
                 
             cell.titleLabel.text = TVShowsDictionaryArray[indexPath.row]["original_name"] as? String
@@ -126,14 +121,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.numberLabel.text = " \(indexPath.row + 1)"
                 
                 cell.moviePic.kf.setImage(with: resource)
-            
-            //   cell.moviePic.kf.setImage(with: resource)
-       
                 return cell
         }
         
         }
-        
         return cell
     }
     
@@ -165,10 +156,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-    func loadImages() {
-        
-        
-    }
+    
 }
 
 
